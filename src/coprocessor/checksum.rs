@@ -78,7 +78,7 @@ impl<S: Snapshot> RequestHandler for ChecksumContext<S> {
         while let Some(row) = self.scanner.next().await? {
             let (k, v) = row.kv();
             if !k.starts_with(&new_prefix) {
-                return Err(box_err!("Wrong prefix expect: {:?}", new_prefix));
+                return Err(box_err!("wrong prefix, expect: {:?}", new_prefix));
             }
             checksum =
                 checksum_crc64_xor(checksum, prefix_digest.clone(), &k[new_prefix.len()..], v);

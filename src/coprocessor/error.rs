@@ -57,7 +57,7 @@ impl From<tidb_query_common::error::StorageError> for Error {
     fn from(err: tidb_query_common::error::StorageError) -> Self {
         match err.0.downcast::<Error>() {
             Ok(e) => e,
-            Err(e) => box_err!("Unknown storage error: {}", e),
+            Err(e) => box_err!("unknown storage error: {}", e),
         }
     }
 }
